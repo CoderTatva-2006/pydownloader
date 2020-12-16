@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import pafy , art , socket
+import pafy , art , socket 
 
 
 def phelp():
@@ -50,9 +50,13 @@ def connection_stream():
         print('Internet not available , please check your connection')
 
 def get_streams_vid(url):
-    pass
-
-
+    vid = pafy.new(url)
+    st = vid.allstreams
+    for i in range(st):
+        for x in st:
+            print(f'[{i}] {x}')
+    given = int(input('Please enter the desired quality\n>'))
+    vid.allstreams[given].download(f'./videos/{vid.title}')
 def main():
     url , choice = user()
 
