@@ -51,6 +51,7 @@ def connection_stream():
         print('Internet not available , please check your connection')
 
 def get_streams_vid(url):
+    #
     pass
 
 def main():
