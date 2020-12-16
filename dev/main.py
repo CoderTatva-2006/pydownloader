@@ -41,26 +41,56 @@ def internet():
         pass
     return False
 
-def connection_stream():
+def connection_stream(url , choice):
     print('Checking internet connection...')
     if internet() == True:
         print('Internet available , getting video data...')
-        get_streams()
+        if choice == 1:
+            get_streams_vid(url)
+        elif choice == 2:
+            playlist_handle(url)
+        else:
+            pass
     else:
         print('Internet not available , please check your connection')
 
 def get_streams_vid(url):
     vid = pafy.new(url)
     st = vid.allstreams
-    for i in range(st):
-        for x in st:
-            print(f'[{i}] {x}')
+    for x in range(len(st)):
+        print(f'[{x}] :- {st[x]} ')
     given = int(input('Please enter the desired quality\n>'))
-    vid.allstreams[given].download(f'./videos/{vid.title}')
+    if str(input('Do you want to download the video[Y/N]')).upper() == 'Y':
+        extension = str(vid.allstreams[given])[0:str(vid.allstreams[given]).find('@')]
+        extension = extension[extension.find(':')+1:]
+        vid.allstreams[given].download(f'./videos/{vid.title}.{extension}')
+
+def playlist_handle(url):
+    playlist_list = pafy.get_playlist(url)
+    for x in range(len(playlist_list)):
+        vid = playlist['items'][x]['pafy']
+        st = vid.allstreams
+        for a in range(len(st)):
+            print(f'[{x}] :- {st[x]} ')
+        given = int(input('Please enter the desired quality\n>'))
+        if str(input('Do you want to download the video[Y/N]')).upper() == 'Y':
+            extension = str(vid.allstreams[given])[0:str(vid.allstreams[given]).find('@')]
+            extension = extension[extension.find(':')+1:]
+            vid.allstreams[given].download(f'./videos/{playlist_list["title"]}/{vid.title}.{extension}')
+
 def main():
     url , choice = user()
+    
+    connection_stream(url , choice)
+    
 
-
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('\nProgram ended by user')
+    except:
+        print('Fatal Error')
     
     
 
