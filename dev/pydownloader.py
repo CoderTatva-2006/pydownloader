@@ -63,7 +63,7 @@ def get_streams_vid(url):
     if str(input('Do you want to download the video[Y/N]')).upper() == 'Y':
         extension = str(vid.allstreams[given])[0:str(vid.allstreams[given]).find('@')]
         extension = extension[extension.find(':')+1:]
-        vid.allstreams[given].download(f'./videos/{vid.title}.{extension}')
+        vid.allstreams[given].download(f'./../videos/{vid.title}.{extension}')
 
 def playlist_handle(url):
     playlist_list = pafy.get_playlist(url)
