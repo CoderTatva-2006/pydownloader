@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-import pytube , pafy , art , socket
-from colorama import Style , Fore
+import pafy , art , socket
 
 
 def phelp():
@@ -51,8 +50,8 @@ def connection_stream():
         print('Internet not available , please check your connection')
 
 def get_streams_vid(url):
-    #
     pass
+
 
 def main():
     url , choice = user()
